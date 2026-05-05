@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <h1 class="logo">pokédex</h1>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="favorites.html">Favorites ⭐</a>
+                <a href="pokemon.html">Search 🔍</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Catch 'em all</h2>
+            <p>Browse, search, and save your favorite Pokémon.</p>
+        </section>
+
+        <section class="controls">
+            <input type="text" id="search-input" placeholder="Search Pokémon by name...">
+            <select id="type-filter">
+                <option value="">All Types</option>
+                <option value="fire">🔥 Fire</option>
+                <option value="water">💧 Water</option>
+                <option value="grass">🌿 Grass</option>
+                <option value="electric">⚡ Electric</option>
+                <option value="psychic">🔮 Psychic</option>
+                <option value="ice">❄️ Ice</option>
+                <option value="dragon">🐉 Dragon</option>
+                <option value="dark">🌑 Dark</option>
+                <option value="fairy">🌸 Fairy</option>
+                <option value="fighting">🥊 Fighting</option>
+                <option value="poison">☠️ Poison</option>
+                <option value="ground">🌍 Ground</option>
+                <option value="rock">🪨 Rock</option>
+                <option value="bug">🐛 Bug</option>
+                <option value="ghost">👻 Ghost</option>
+                <option value="steel">🔩 Steel</option>
+                <option value="normal">⚪ Normal</option>
+                <option value="flying">🦅 Flying</option>
+            </select>
+        </section>
+
+        <div id="loading" class="loading-msg">Loading Pokémon... ⚡</div>
+        <div id="error" class="error-msg" style="display:none;">Something went wrong. Please try again.</div>
+        <div id="empty" class="empty-msg" style="display:none;">No Pokémon found. Try a different search!</div>
+
+        <section class="pokemon-grid" id="pokemon-container"></section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <button id="modal-close">✕</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ using PokéAPI • Vanilla JS</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
