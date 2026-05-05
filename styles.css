@@ -46,6 +46,15 @@ header {
     align-items: center;
 }
 
+.logo-link {
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+}
+
 .logo {
     font-size: 2rem;
     font-weight: 900;
