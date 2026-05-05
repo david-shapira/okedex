@@ -311,6 +311,28 @@
     padding: 0 28px 28px;
     display: flex;
     justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.detail-back-btn {
+    padding: 12px 32px;
+    border-radius: 30px;
+    border: 2px solid var(--text-muted);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.detail-back-btn:hover {
+    border-color: var(--text);
+    color: var(--text);
 }
 
 .detail-fav-btn {
