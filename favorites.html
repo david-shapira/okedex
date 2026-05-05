@@ -1,47 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Favorites – Pokédex</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
+  </head>
+  <body>
     <header>
-        <div class="header-inner">
-            <a href="index.html" class="logo-link"><h1 class="logo">pokédex</h1></a>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="favorites.html" class="active">Favorites ⭐</a>
-                <a href="pokemon.html">Search 🔍</a>
-                <a href="about.html">About</a>
-            </nav>
-        </div>
+      <div class="header-inner">
+        <a
+          href="index.html"
+          class="logo-link"
+          ><h1 class="logo">pokédex</h1></a
+        >
+        <nav>
+          <a href="index.html">Home</a>
+          <a
+            href="favorites.html"
+            class="active"
+            >Favorites⭐</a
+          >
+          <a href="pokemon.html">Search</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <section class="hero">
-            <h2>Your Favorites ⭐</h2>
-            <p>Pokémon you've saved appear here.</p>
-        </section>
+      <section class="hero">
+        <h2>Your Favorites ⭐</h2>
+        <p>Pokémon you've saved appear here.</p>
+      </section>
 
-        <div id="empty-fav" class="empty-msg" style="display:none;">You haven't saved any favorites yet!</div>
-        <section class="pokemon-grid" id="favorites-container"></section>
+      <div
+        id="empty-fav"
+        class="empty-msg"
+        style="display: none"
+      >
+        You haven't saved any favorites yet!
+      </div>
+      <section
+        class="pokemon-grid"
+        id="favorites-container"
+      ></section>
     </main>
 
     <!-- Modal -->
-    <div id="modal" class="modal-overlay" style="display:none;">
-        <div class="modal-card">
-            <button id="modal-close">✕</button>
-            <div id="modal-content"></div>
-        </div>
+    <div
+      id="modal"
+      class="modal-overlay"
+      style="display: none"
+    >
+      <div class="modal-card">
+        <button id="modal-close">✕</button>
+        <div id="modal-content"></div>
+      </div>
     </div>
 
     <footer>
-        <p>Made with ❤️ using PokéAPI • Vanilla JS</p>
+      <p>Made with ❤️ using PokéAPI • Vanilla JS</p>
     </footer>
 
     <script src="favorites.js"></script>
-</body>
+  </body>
 </html>
