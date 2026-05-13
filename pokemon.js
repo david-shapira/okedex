@@ -1,4 +1,4 @@
-// ===== TYPE COLORS (from React component) =====
+// ===== TYPE COLORS =====
 const typeColors = {
     normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C',
     grass: '#7AC74C', ice: '#96D9D6', fighting: '#C22E28', poison: '#A33EA1',
@@ -7,7 +7,7 @@ const typeColors = {
     steel: '#B7B7CE', fairy: '#D685AD'
 };
 
-// ===== STAT NAME TRANSLATIONS (from React component) =====
+// ===== STAT NAME TRANSLATIONS =====
 const statNames = {
     'hp': 'HP',
     'attack': 'Attack',
@@ -61,6 +61,7 @@ async function fetchPokemon(query) {
 
         const data = await response.json();
         currentPokemon = data;
+        console.log(data);
         renderPokemon(data);
 
     } catch (err) {
@@ -79,7 +80,7 @@ function renderPokemon(pokemon) {
     const color1 = typeColors[primaryType] || '#A8A77A';
     const color2 = typeColors[secondaryType] || color1;
 
-    // --- Header gradient (from React component) ---
+    // --- Header gradient ---
     detailHeader.style.background = `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`;
 
     // --- Name & ID ---
@@ -91,7 +92,7 @@ function renderPokemon(pokemon) {
         `<span class="detail-type-badge">${t.type.name}</span>`
     ).join('');
 
-    // --- Sprites (hover switch like React component) ---
+    // --- Sprites ---
     officialSprite = pokemon.sprites.other?.['official-artwork']?.front_default || pokemon.sprites.front_default;
     animatedSprite = pokemon.sprites.other?.showdown?.front_default || null;
 
@@ -123,7 +124,7 @@ function renderPokemon(pokemon) {
         `<span class="ability-badge ${a.is_hidden ? 'hidden-ability' : ''}">${a.ability.name}${a.is_hidden ? ' (hidden)' : ''}</span>`
     ).join('');
 
-    // --- Stats with animated bars (from React component logic) ---
+    // --- Stats with animated bars ---
     detailStats.innerHTML = pokemon.stats.map(s => {
         const val = s.base_stat;
         const percent = Math.min((val / 255) * 100, 100);
@@ -146,9 +147,9 @@ function renderPokemon(pokemon) {
         });
     }, 50);
 
-    // --- Cry sound (from React component) ---
-    if (pokemon.cries?.latest) {
-        cryAudio.src = pokemon.cries.latest;
+    // --- Cry sound ---
+    if (pokemon.cries?.legacy) {
+        cryAudio.src = pokemon.cries.legacy;
         cryBtn.style.display = 'flex';
         cryBtn.onclick = () => {
             cryAudio.volume = 0.5;
