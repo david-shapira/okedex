@@ -26,7 +26,7 @@ async function fetchAllBasic() {
 
 // ===== FETCH DETAILS FOR A BATCH =====
 async function fetchBatch(list) {
-    const promises = list.map(p => fetch(p.url).then(r => r.json()));
+    const promises = list.map(pokemonItem => fetch(pokemonItem.url).then(response => response.json()));
     return await Promise.all(promises);
 }
 
@@ -81,8 +81,8 @@ function renderPokemon(pokemonArray) {
         card.className = 'pokemon-card';
 
         const isFav = favorites.includes(pokemon.id);
-        const typesHTML = pokemon.types.map(t =>
-            `<span class="type-badge type-${t.type.name}">${t.type.name}</span>`
+        const typesHTML = pokemon.types.map(typeObj =>
+            `<span class="type-badge type-${typeObj.type.name}">${typeObj.type.name}</span>`
         ).join('');
 
         card.innerHTML = `
@@ -108,11 +108,28 @@ function renderPokemon(pokemonArray) {
     });
 }
 
-// ===== FILTER (only filters already-loaded pokemon) =====
-function filterPokemon() {
+// ===== FILTER =====
+
+// Filter by text search only
+function filterByText(pokemonList, searchText) {
+    if (!searchText) return pokemonList;
+    return pokemonList.filter(pokemon => pokemon.name.includes(searchText));
+}
+
+// Filter by Pokemon type only
+function filterByTypeCategory(pokemonList, selectedType) {
+    if (!selectedType) return pokemonList;
+    return pokemonList.filter(pokemon =>
+        pokemon.types.some(typeObj => typeObj.type.name === selectedType)
+    );
+}
+
+// Main function to apply all active filters
+function applyFilters() {
     const searchText = searchInput.value.toLowerCase().trim();
     const selectedType = typeFilter.value;
 
+    // If both filters are empty, return to normal display
     if (!searchText && !selectedType) {
         filteredMode = false;
         renderPokemon(loadedPokemon);
@@ -121,15 +138,17 @@ function filterPokemon() {
 
     filteredMode = true;
 
-    const filtered = loadedPokemon.filter(pokemon => {
-        const nameMatch = !searchText || pokemon.name.includes(searchText);
-        const typeMatch = !selectedType ||
-            pokemon.types.some(t => t.type.name === selectedType);
-        return nameMatch && typeMatch;
-    });
+    // Chain the filters: text first, then type
+    let filteredResults = filterByText(loadedPokemon, searchText);
+    filteredResults = filterByTypeCategory(filteredResults, selectedType);
 
-    renderPokemon(filtered);
+    renderPokemon(filteredResults);
 }
+
+// ===== EVENT LISTENERS =====
+// הפונקציות האלו קוראות לפונקציה הראשית בכל פעם שיש שינוי
+searchInput.addEventListener('input', applyFilters);
+typeFilter.addEventListener('change', applyFilters);
 
 // ===== INFINITE SCROLL =====
 window.addEventListener('scroll', () => {
@@ -140,8 +159,8 @@ window.addEventListener('scroll', () => {
     const scrollBottom = window.innerHeight + window.scrollY;
     const pageHeight = document.body.offsetHeight;
 
-    // Load more when user is 300px from bottom
-    if (scrollBottom >= pageHeight - 300) {
+    // Load more when user is 600px from bottom
+    if (scrollBottom >= pageHeight - 600) {
         loadNextBatch();
     }
 });
@@ -159,7 +178,7 @@ function saveFavorites(favs) {
 function toggleFavorite(id, btn) {
     let favs = getFavorites();
     if (favs.includes(id)) {
-        favs = favs.filter(f => f !== id);
+        favs = favs.filter(favId => favId !== id);
         btn.classList.remove('active');
     } else {
         favs.push(id);
@@ -167,10 +186,6 @@ function toggleFavorite(id, btn) {
     }
     saveFavorites(favs);
 }
-
-// ===== EVENT LISTENERS =====
-searchInput.addEventListener('input', filterPokemon);
-typeFilter.addEventListener('change', filterPokemon);
 
 // ===== INIT =====
 init();

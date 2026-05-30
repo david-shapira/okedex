@@ -32,7 +32,7 @@ async function loadFavorites() {
     }
 
     try {
-        const promises = favIds.map(id => getPokemonById(id));
+        const promises = favIds.map(pokemonId => getPokemonById(pokemonId));
         const pokemonList = await Promise.all(promises);
         renderFavorites(pokemonList);
     } catch (err) {
@@ -48,8 +48,8 @@ function renderFavorites(pokemonArray) {
         const card = document.createElement('div');
         card.className = 'pokemon-card';
 
-        const typesHTML = pokemon.types.map(t =>
-            `<span class="type-badge type-${t.type.name}">${t.type.name}</span>`
+        const typesHTML = pokemon.types.map(typeObj =>
+            `<span class="type-badge type-${typeObj.type.name}">${typeObj.type.name}</span>`
         ).join('');
 
         card.innerHTML = `
@@ -78,7 +78,7 @@ function renderFavorites(pokemonArray) {
 
 function removeFavorite(id, card) {
     let favs = getFavorites();
-    favs = favs.filter(f => f !== id);
+    favs = favs.filter(favId => favId !== id);
     saveFavorites(favs);
     card.remove();
 

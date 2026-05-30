@@ -72,7 +72,7 @@ async function fetchPokemon(query) {
 }
 
 // ===== RENDER POKEMON =====
-function renderPokemon(pokemon) {
+function renderPokemon(pokemon){
     loadingEl.style.display = 'none';
 
     const primaryType = pokemon.types[0]?.type?.name || 'normal';
@@ -88,8 +88,8 @@ function renderPokemon(pokemon) {
     detailId.textContent = `#${String(pokemon.id).padStart(3, '0')}`;
 
     // --- Types ---
-    detailTypes.innerHTML = pokemon.types.map(t =>
-        `<span class="detail-type-badge">${t.type.name}</span>`
+    detailTypes.innerHTML = pokemon.types.map(typeObj =>
+        `<span class="detail-type-badge">${typeObj.type.name}</span>`
     ).join('');
 
     // --- Sprites ---
@@ -120,15 +120,15 @@ function renderPokemon(pokemon) {
     detailXp.textContent = pokemon.base_experience || '—';
 
     // --- Abilities ---
-    detailAbilities.innerHTML = pokemon.abilities.map(a =>
-        `<span class="ability-badge ${a.is_hidden ? 'hidden-ability' : ''}">${a.ability.name}${a.is_hidden ? ' (hidden)' : ''}</span>`
+    detailAbilities.innerHTML = pokemon.abilities.map(abilityObj =>
+        `<span class="ability-badge ${abilityObj.is_hidden ? 'hidden-ability' : ''}">${abilityObj.ability.name}${abilityObj.is_hidden ? ' (hidden)' : ''}</span>`
     ).join('');
 
     // --- Stats with animated bars ---
-    detailStats.innerHTML = pokemon.stats.map(s => {
-        const val = s.base_stat;
+    detailStats.innerHTML = pokemon.stats.map(statObj => {
+        const val = statObj.base_stat;
         const percent = Math.min((val / 255) * 100, 100);
-        const label = statNames[s.stat.name] || s.stat.name;
+        const label = statNames[statObj.stat.name] || statObj.stat.name;
         return `
             <div class="stat-row">
                 <span class="stat-name">${label}</span>
@@ -194,12 +194,17 @@ favBtn.addEventListener('click', () => {
     if (!currentPokemon) return;
     let favs = getFavorites();
     if (favs.includes(currentPokemon.id)) {
-        favs = favs.filter(f => f !== currentPokemon.id);
+        favs = favs.filter(favId => favId !== currentPokemon.id);
     } else {
         favs.push(currentPokemon.id);
     }
     saveFavorites(favs);
     updateFavBtn(currentPokemon.id);
+});
+
+// ===== BACK BUTTON =====
+document.getElementById('detail-back-btn').addEventListener('click', () => {
+    history.back();
 });
 
 // ===== SEARCH FORM =====
