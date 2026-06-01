@@ -1,115 +1,201 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Pokémon Detail – Pokédex</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="pokemon.css">
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="pokemon.css"
+    />
+  </head>
+  <body>
     <header>
-        <div class="header-inner">
-            <a href="index.html" class="logo-link"><h1 class="logo">pokédex</h1></a>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="favorites.html">Favorites ⭐</a>
-                <a href="about.html">About</a>
-            </nav>
-        </div>
+      <div class="header-inner">
+        <a
+          href="index.html"
+          class="logo-link"
+          ><h1 class="logo">pokédex</h1></a
+        >
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="favorites.html">Favorites ⭐</a>
+          <a
+            href="pokemon.html"
+            class="active"
+            >Search</a
+          >
+          <a href="about.html">About</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <!-- Search bar -->
-        <section class="detail-search">
-            <form id="search-form">
-                <input type="text" id="detail-search-input" placeholder="Search any Pokémon by name... (e.g. pikachu)">
-                <button type="submit">Search</button>
-            </form>
-        </section>
+      <!-- Search bar -->
+      <section class="detail-search">
+        <form id="search-form">
+          <input
+            type="text"
+            id="detail-search-input"
+            placeholder="Search any Pokémon by name... (e.g. pikachu)"
+          />
+          <button type="submit">Search</button>
+        </form>
+      </section>
 
-        <div id="loading" class="loading-msg" style="display:none;">Loading Pokémon... ⚡</div>
-        <div id="error" class="error-msg" style="display:none;"></div>
+      <div
+        id="loading"
+        class="loading-msg"
+        style="display: none"
+      >
+        Loading Pokémon... ⚡
+      </div>
+      <div
+        id="error"
+        class="error-msg"
+        style="display: none"
+      ></div>
 
-        <!-- Main card -->
-        <section id="pokemon-detail" style="display:none;">
+      <!-- Main card -->
+      <section
+        id="pokemon-detail"
+        style="display: none"
+      >
+        <!-- Gradient header -->
+        <div
+          id="detail-header"
+          class="detail-header"
+        >
+          <div class="detail-header-inner">
+            <div>
+              <h2 id="detail-name"></h2>
+              <span
+                id="detail-id"
+                class="detail-number"
+              ></span>
+              <div
+                id="detail-types"
+                class="detail-types"
+              ></div>
+            </div>
+            <button
+              id="cry-btn"
+              class="cry-btn"
+              title="Play cry sound"
+              style="display: none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+                />
+              </svg>
+            </button>
+            <audio id="cry-audio"></audio>
+          </div>
+        </div>
 
-            <!-- Gradient header -->
-            <div id="detail-header" class="detail-header">
-                <div class="detail-header-inner">
-                    <div>
-                        <h2 id="detail-name"></h2>
-                        <span id="detail-id" class="detail-number"></span>
-                        <div id="detail-types" class="detail-types"></div>
-                    </div>
-                    <button id="cry-btn" class="cry-btn" title="Play cry sound" style="display:none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                        </svg>
-                    </button>
-                    <audio id="cry-audio"></audio>
-                </div>
+        <!-- Body -->
+        <div class="detail-body">
+          <!-- Sprite -->
+          <div class="detail-sprite-wrap">
+            <img
+              id="detail-sprite"
+              src=""
+              alt=""
+              class="detail-sprite"
+            />
+            <p
+              id="hover-hint"
+              class="hover-hint"
+            >
+              Hover for animation ✨
+            </p>
+          </div>
+
+          <!-- Info -->
+          <div class="detail-info">
+            <!-- Physical stats -->
+            <div class="physical-stats">
+              <div class="physical-item">
+                <span class="physical-label">📏 Height</span>
+                <span
+                  id="detail-height"
+                  class="physical-value"
+                ></span>
+              </div>
+              <div class="divider-v"></div>
+              <div class="physical-item">
+                <span class="physical-label">⚖️ Weight</span>
+                <span
+                  id="detail-weight"
+                  class="physical-value"
+                ></span>
+              </div>
+              <div class="divider-v"></div>
+              <div class="physical-item">
+                <span class="physical-label">⚡ Base XP</span>
+                <span
+                  id="detail-xp"
+                  class="physical-value"
+                ></span>
+              </div>
             </div>
 
-            <!-- Body -->
-            <div class="detail-body">
-
-                <!-- Sprite -->
-                <div class="detail-sprite-wrap">
-                    <img id="detail-sprite" src="" alt="" class="detail-sprite">
-                    <p id="hover-hint" class="hover-hint">Hover for animation ✨</p>
-                </div>
-
-                <!-- Info -->
-                <div class="detail-info">
-
-                    <!-- Physical stats -->
-                    <div class="physical-stats">
-                        <div class="physical-item">
-                            <span class="physical-label">📏 Height</span>
-                            <span id="detail-height" class="physical-value"></span>
-                        </div>
-                        <div class="divider-v"></div>
-                        <div class="physical-item">
-                            <span class="physical-label">⚖️ Weight</span>
-                            <span id="detail-weight" class="physical-value"></span>
-                        </div>
-                        <div class="divider-v"></div>
-                        <div class="physical-item">
-                            <span class="physical-label">⚡ Base XP</span>
-                            <span id="detail-xp" class="physical-value"></span>
-                        </div>
-                    </div>
-
-                    <!-- Abilities -->
-                    <div class="abilities-section">
-                        <h3 class="section-title">Abilities</h3>
-                        <div id="detail-abilities" class="abilities-list"></div>
-                    </div>
-
-                    <!-- Base stats -->
-                    <div class="stats-section">
-                        <h3 class="section-title">⚔️ Base Stats</h3>
-                        <div id="detail-stats" class="stats-list"></div>
-                    </div>
-
-                </div>
+            <!-- Abilities -->
+            <div class="abilities-section">
+              <h3 class="section-title">Abilities</h3>
+              <div
+                id="detail-abilities"
+                class="abilities-list"
+              ></div>
             </div>
 
-            <!-- Fav button -->
-            <div class="detail-fav-wrap">
-                <button id="detail-back-btn" class="detail-back-btn">← Back</button>
-                <button id="detail-fav-btn" class="detail-fav-btn">⭐ Add to Favorites</button>
+            <!-- Base stats -->
+            <div class="stats-section">
+              <h3 class="section-title">⚔️ Base Stats</h3>
+              <div
+                id="detail-stats"
+                class="stats-list"
+              ></div>
             </div>
+          </div>
+        </div>
 
-        </section>
+        <!-- Fav button -->
+        <div class="detail-fav-wrap">
+          <button
+            id="detail-back-btn"
+            class="detail-back-btn"
+          >
+            ← Back
+          </button>
+          <button
+            id="detail-fav-btn"
+            class="detail-fav-btn"
+          >
+            ⭐ Add to Favorites
+          </button>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <p>Made with ❤️ using PokéAPI • Vanilla JS</p>
+      <p>Made with ❤️ using PokéAPI • Vanilla JS</p>
     </footer>
 
     <script src="pokemon.js"></script>
-</body>
+  </body>
 </html>

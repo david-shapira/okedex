@@ -4,6 +4,8 @@ const emptyEl = document.getElementById('empty-fav');
 const modal = document.getElementById('modal');
 const modalContent = document.getElementById('modal-content');
 const modalClose = document.getElementById('modal-close');
+const clearFavsBtn = document.getElementById('clear-favorites');
+
 
 // ===== FAVORITES =====
 function getFavorites() {
@@ -27,9 +29,12 @@ async function loadFavorites() {
     const favIds = getFavorites();
 
     if (favIds.length === 0) {
+        container.innerHTML = '';
         emptyEl.style.display = 'block';
         return;
     }
+
+    emptyEl.style.display = 'none';
 
     try {
         const promises = favIds.map(pokemonId => getPokemonById(pokemonId));
