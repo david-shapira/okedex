@@ -4,9 +4,13 @@ const emptyEl = document.getElementById('empty-fav');
 const modal = document.getElementById('modal');
 const modalContent = document.getElementById('modal-content');
 const modalClose = document.getElementById('modal-close');
-const clearFavsBtn = document.getElementById('clear-favorites');
+const clearFavsBtn = document.getElementById('clear-favs');
 
 
+clearFavsBtn.addEventListener('click', () => {
+    localStorage.removeItem('pokemon-favorites');
+    loadFavorites();
+});
 // ===== FAVORITES =====
 function getFavorites() {
     const stored = localStorage.getItem('pokemon-favorites');

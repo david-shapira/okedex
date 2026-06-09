@@ -124,6 +124,9 @@ function filterByTypeCategory(pokemonList, selectedType) {
     );
 }
 
+
+
+
 // Main function to apply all active filters
 function applyFilters() {
     const searchText = searchInput.value.toLowerCase().trim();

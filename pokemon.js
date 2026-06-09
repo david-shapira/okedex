@@ -39,10 +39,13 @@ const cryBtn = document.getElementById('cry-btn');
 const cryAudio = document.getElementById('cry-audio');
 const favBtn = document.getElementById('detail-fav-btn');
 
+
+
 // ===== CURRENT POKEMON =====
 let currentPokemon = null;
 let officialSprite = '';
 let animatedSprite = '';
+
 
 // ===== FETCH POKEMON =====
 async function fetchPokemon(query) {
